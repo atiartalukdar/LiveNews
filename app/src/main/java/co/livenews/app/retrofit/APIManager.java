@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import co.livenews.app.bp.MyApplication;
+import co.livenews.app.models.SubmitData;
 import co.livenews.app.models.TradingModel;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -46,5 +47,11 @@ public class APIManager {
     public void getArticleList(String ctgID,String sortOrder, RequestListener<TradingModel> listener) {
         api.getArticleList(ctgID,sortOrder).enqueue(new APICallback<TradingModel>(_context,listener));
     }
+
+    public void sendLead(String name, String phone, String country, RequestListener<SubmitData> listener){
+        api.sendLead(name,phone,country).enqueue(new APICallback<SubmitData>(_context,listener));
+    }
+
+
 
 }

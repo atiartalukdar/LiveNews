@@ -27,6 +27,7 @@ import java.util.List;
 
 import co.livenews.app.R;
 import co.livenews.app.adapter.CategoryAdapter;
+import co.livenews.app.models.SubmitData;
 import co.livenews.app.models.TradingModel;
 import co.livenews.app.retrofit.APIManager;
 import co.livenews.app.retrofit.RequestListener;
@@ -39,6 +40,7 @@ import co.livenews.app.retrofit.RequestListener;
 public class TradingFragment extends Fragment {
     private final String TAG = getClass().getName() + " Atiar - ";
     EditText _name,_phone;
+    String _country;
     CountryCodePicker ccp;
     APIManager _apiManager;
     ListView listView;
@@ -122,6 +124,30 @@ public class TradingFragment extends Fragment {
         _phone = view.findViewById(R.id.phone);
         ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(_phone);
+
+        _country = ccp.getSelectedCountryName();
+
+                Button submitButton = view.findViewById(R.id.submitLead);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryEnglishName(), new RequestListener<SubmitData>() {
+                    @Override
+                    public void onSuccess(SubmitData response) {
+                        if (response !=  null && response.getStatus().equals("ok")){
+                            showDialog("Thank you " + _name.getText().toString(),"Your data is submitted.");
+                            _name.setText("");
+                            _phone.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        showDialog("Please try again later" + _name.getText().toString(),"Something is wrong. \n"+t.getMessage());
+                    }
+                });
+            }
+        });
     }
 
     private void categoryFragment(View view, String categoryID) {

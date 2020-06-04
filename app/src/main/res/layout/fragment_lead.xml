@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Name:"
+                android:text="@string/name_ar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -33,14 +33,14 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Your Name"
+                android:hint="@string/enter_your_phone_name_ar"
                 android:layout_marginBottom="30dp"
                 android:maxLines="1">
 
             </EditText>
 
             <TextView
-                android:text="Phone number:"
+                android:text="@string/phone_number_ar"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content">
@@ -64,7 +64,7 @@
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Phone Number"
+                    android:hint="@string/enter_your_phone_number_ar"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="30dp"
@@ -78,7 +78,7 @@
                 android:id="@+id/submitLead"
                 android:layout_gravity="end"
                 android:layout_width="wrap_content"
-                android:text="submit"
+                android:text="@string/submit_ar"
                 android:layout_height="wrap_content">
 
             </Button>

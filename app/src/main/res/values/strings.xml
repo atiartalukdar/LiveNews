@@ -3,4 +3,30 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="submit_ar">التسجيل</string>
+    <string name="submit_en">Submit</string>
+
+    <string name="name_ar">الاسم كامل</string>
+    <string name="name_en">Full Name</string>
+
+    <string name="enter_your_phone_number_ar">ادخل رقم هاتفك</string>
+    <string name="enter_your_phone_number_en">Enter your phone number</string>
+
+    <string name="enter_your_phone_name_en">Enter your name</string>
+    <string name="enter_your_phone_name_ar">ادخل الاسم</string>
+
+    <string name="phone_number_ar">رقم الهاتف</string>
+    <string name="phone_number_en">Phone Number</string>
+
+    <string name="start_trading_ar">ابدأ التداول</string>
+    <string name="start_trading_en">Start Trading</string>
+
+    <string name="success_stories_ar">قصص نجاح</string>
+    <string name="success_stories_en">success stories </string>
+
+    <string name="learn_trading_ar">تعليم التداول</string>
+    <string name="learn_trading_en">Learn Trading</string>
+
+
 </resources>
