@@ -36,13 +36,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                         switch (position){
                             case 0:
-                                tab.setText("Trading");
+                                tab.setText(getResources().getString(R.string.learn_trading_ar));
                                 break;
                             case 1:
-                                tab.setText("Success Stories");
+                                //tab.setText("Success Stories");
+                                tab.setText(getResources().getString(R.string.success_stories_ar));
                                 break;
                             case 2:
-                                tab.setText("Start Trading");
+                                //tab.setText("Start Trading");
+                                tab.setText(getResources().getString(R.string.start_trading_ar));
                                 break;
                         }
                     }

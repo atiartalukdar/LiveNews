@@ -29,4 +29,20 @@
     <string name="learn_trading_en">Learn Trading</string>
 
 
+    <string name="please_wait_ar">من فضلك انتظر</string>
+    <string name="please_wait_en">Please wait </string>
+
+    <string name="downloadin_ar"> جاري تحميل البيانات ...    </string>
+    <string name="downloadin_en">Downloading data...</string>
+
+    <string name="thank_you_ar">شكراً لك يا</string>
+    <string name="thank_you_en">Thank you </string>
+
+
+    <string name="submitted_ar">تم تسجيل بياناتك سيتم التواصل معك على هاتفك خلال ٢٤ ساعه</string>
+    <string name="submitted_en">Your data is submitted </string>
+
+
+
+
 </resources>

@@ -135,7 +135,7 @@ public class TradingFragment extends Fragment {
                     @Override
                     public void onSuccess(SubmitData response) {
                         if (response !=  null && response.getStatus().equals("ok")){
-                            showDialog("Thank you " + _name.getText().toString(),"Your data is submitted.");
+                            showDialog(getResources().getString(R.string.thank_you_ar)+ _name.getText().toString(),getResources().getString(R.string.submit_ar));
                             _name.setText("");
                             _phone.setText("");
                         }
@@ -156,8 +156,8 @@ public class TradingFragment extends Fragment {
         listView.setAdapter(categoryAdapter);
         final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("Please wait")
-                .setDetailsLabel("Downloading data")
+                .setLabel(getResources().getString(R.string.please_wait_ar))
+                .setDetailsLabel(getResources().getString(R.string.downloadin_ar))
                 .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
