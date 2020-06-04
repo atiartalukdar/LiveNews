@@ -42,6 +42,9 @@
         android:padding="10dp"
         android:layout_height="wrap_content">
 
+<!--
+        https://stackoverflow.com/questions/2459916/how-to-make-an-imageview-with-rounded-corners
+-->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/titleImage"
             android:layout_height="100dp"

@@ -4,14 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <TextView
-        android:id="@+id/tv_counter"
+
+    <ListView
+        android:id="@+id/listView"
+        tools:listitem="@layout/list_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="@string/hello_blank_fragment"
-        />
+        android:layout_height="match_parent">
+    </ListView>
 </FrameLayout>

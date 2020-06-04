@@ -67,4 +67,16 @@ dependencies {
     //push notification library
     implementation 'com.onesignal:OneSignal:3.14.0'
 
+
+    //Picasso for loading network image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //retrofit for network call
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+
+    //shimmer library for making facebook locading animation
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 }
