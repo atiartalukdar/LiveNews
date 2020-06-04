@@ -43,7 +43,7 @@ public class APIManager {
         api = retrofit.create(APIInterface.class);
     }
 
-    public void getArticleList(String ctgID, String sortOrder, RequestListener<TradingModel> listener) {
+    public void getArticleList(String ctgID,String sortOrder, RequestListener<TradingModel> listener) {
         api.getArticleList(ctgID,sortOrder).enqueue(new APICallback<TradingModel>(_context,listener));
     }
 

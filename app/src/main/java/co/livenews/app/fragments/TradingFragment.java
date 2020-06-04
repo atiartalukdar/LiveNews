@@ -3,6 +3,7 @@ package co.livenews.app.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,12 @@ import androidx.fragment.app.Fragment;
 import com.hbb20.CountryCodePicker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import java.util.List;
+
 import co.livenews.app.R;
+import co.livenews.app.models.TradingModel;
+import co.livenews.app.retrofit.APIManager;
+import co.livenews.app.retrofit.RequestListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,9 +34,11 @@ import co.livenews.app.R;
  * create an instance of this fragment.
  */
 public class TradingFragment extends Fragment {
+    private final String TAG = getClass().getName() + " Atiar - ";
+
     EditText _name,_phone;
     CountryCodePicker ccp;
-
+    APIManager _apiManager;
     private static final String ARG_COUNT = "param1";
     private Integer counter;
     private int[] COLOR_MAP = {
@@ -53,6 +61,7 @@ public class TradingFragment extends Fragment {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _apiManager = new APIManager();
         if (getArguments() != null) {
             counter = getArguments().getInt(ARG_COUNT);
         }
@@ -62,12 +71,18 @@ public class TradingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_trading, container, false);
-        if (counter==2){
-            view = inflater.inflate(R.layout.fragment_lead, container, false);
-            _name = view.findViewById(R.id.name);
-            _phone = view.findViewById(R.id.phone);
-            ccp = view.findViewById(R.id.ccp);
-            ccp.registerCarrierNumberEditText(_phone);
+
+        switch (counter){
+            case 0:
+                categoryFragment(view,"24");
+                break;
+            case 1:
+                categoryFragment(view,"25");
+                break;
+            case 2:
+                view = inflater.inflate(R.layout.fragment_lead, container, false);
+                leadFragment(view);
+                break;
         }
 
         return  view;
@@ -106,4 +121,39 @@ public class TradingFragment extends Fragment {
         alert = builder.create();
         alert.show();
     }
+
+    private void leadFragment(View view){
+        _name = view.findViewById(R.id.name);
+        _phone = view.findViewById(R.id.phone);
+        ccp = view.findViewById(R.id.ccp);
+        ccp.registerCarrierNumberEditText(_phone);
+    }
+
+    private void categoryFragment(View view, String categoryID) {
+        final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Downloading data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        _apiManager.getArticleList(categoryID, "DESC", new RequestListener<TradingModel>() {
+            @Override
+            public void onSuccess(TradingModel response) {
+                kProgressHUD.dismiss();
+                Log.e(TAG, response.getStatus());
+                if (response!=null && response.getStatus().equals("ok")){
+                    List<TradingModel.AllRecord> allRecords = response.getAllRecord();
+                    Log.e(TAG, allRecords.size()+"");
+                }
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                kProgressHUD.dismiss(); }
+        });
+    }
+
 }
