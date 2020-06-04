@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +22,11 @@ import androidx.fragment.app.Fragment;
 import com.hbb20.CountryCodePicker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.livenews.app.R;
+import co.livenews.app.adapter.CategoryAdapter;
 import co.livenews.app.models.TradingModel;
 import co.livenews.app.retrofit.APIManager;
 import co.livenews.app.retrofit.RequestListener;
@@ -35,10 +38,14 @@ import co.livenews.app.retrofit.RequestListener;
  */
 public class TradingFragment extends Fragment {
     private final String TAG = getClass().getName() + " Atiar - ";
-
     EditText _name,_phone;
     CountryCodePicker ccp;
     APIManager _apiManager;
+    ListView listView;
+    CategoryAdapter categoryAdapter;
+
+    List<TradingModel.AllRecord> tradingModelList = new ArrayList<>();;
+
     private static final String ARG_COUNT = "param1";
     private Integer counter;
     private int[] COLOR_MAP = {
@@ -71,7 +78,6 @@ public class TradingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_trading, container, false);
-
         switch (counter){
             case 0:
                 categoryFragment(view,"24");
@@ -93,17 +99,6 @@ public class TradingFragment extends Fragment {
         //view.setBackgroundColor(ContextCompat.getColor(getContext(), COLOR_MAP[counter]));
         //TextView textViewCounter = view.findViewById(R.id.tv_counter);
         //textViewCounter.setText("Fragment No " + (counter+1));
-
-        if (counter==2){
-            Button submitButton = view.findViewById(R.id.submitLead);
-            submitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDialog("Thank you "+_name.getText(), "Your data is submitted " + ccp.getFullNumberWithPlus());
-                }
-            });
-
-        }
     }
 
     public void showDialog(String title, String message) {
@@ -130,6 +125,9 @@ public class TradingFragment extends Fragment {
     }
 
     private void categoryFragment(View view, String categoryID) {
+        listView = view.findViewById(R.id.listView);
+        categoryAdapter = new CategoryAdapter(getActivity(), tradingModelList,categoryID);
+        listView.setAdapter(categoryAdapter);
         final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -145,8 +143,11 @@ public class TradingFragment extends Fragment {
                 kProgressHUD.dismiss();
                 Log.e(TAG, response.getStatus());
                 if (response!=null && response.getStatus().equals("ok")){
-                    List<TradingModel.AllRecord> allRecords = response.getAllRecord();
-                    Log.e(TAG, allRecords.size()+"");
+                    //List<TradingModel.AllRecord> allRecords = response.getAllRecord();
+                    tradingModelList.clear();
+                    tradingModelList.addAll(response.getAllRecord());
+                    Log.e(TAG, tradingModelList.size()+"");
+                    categoryAdapter.notifyDataSetChanged();
                 }
             }
 

@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +25,15 @@ public class CategoryAdapter extends BaseAdapter {
     private Context context;
     private Activity activity;
     private LayoutInflater inflater;
-    private List<TradingModel> data;
+    private List<TradingModel.AllRecord> data;
+    private String id;
 
     private final String TAG = getClass().getSimpleName() + " Atiar= ";
 
-    public CategoryAdapter(Activity activity, List<TradingModel> data) {
+    public CategoryAdapter(Activity activity, List<TradingModel.AllRecord> data, String id) {
         this.activity = activity;
         this.data = data;
+        this.id = id;
     }
 
     @Override
@@ -48,7 +54,7 @@ public class CategoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         context = activity.getApplicationContext();
-        TradingModel tradingModel = data.get(position);
+        TradingModel.AllRecord tradingModel = data.get(position);
 
         if (inflater == null)
             inflater = (LayoutInflater) activity
@@ -57,15 +63,19 @@ public class CategoryAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item, null);
 
 
-/*
-        TextView _website = convertView.findViewById(R.id.weebsite);
-        Button _allNumbers = convertView.findViewById(R.id.allNumbersButton);
-        Button _visitWebsite = convertView.findViewById(R.id.visitWebview);
 
-*/
+        TextView _title = convertView.findViewById(R.id.titleText);
+        TextView _date = convertView.findViewById(R.id.publishedDate);
+        ShapeableImageView _image = convertView.findViewById(R.id.titleImage);
 
-        //_website.setText(websitesModel.getWebsite());
+        _title.setText(tradingModel.getPostTitle());
+        _date.setText(tradingModel.getPostDate());
 
+        Picasso.get()
+                .load(tradingModel.getImage())
+                .centerCrop()
+                .fit()
+                .into(_image);
 /*
         _allNumbers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +95,7 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     //To update the searchView items in TransportList Activity
-    public void update(List<TradingModel> resuls){
+    public void update(List<TradingModel.AllRecord> resuls){
         data = new ArrayList<>();
         data.addAll(resuls);
         notifyDataSetChanged();
