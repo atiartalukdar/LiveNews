@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }).attach();
+
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(false)
+                .init();
     }
 
     private ViewPagerAdapter createCardAdapter() {

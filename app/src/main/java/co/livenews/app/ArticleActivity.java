@@ -60,8 +60,4 @@ public class ArticleActivity extends AppCompatActivity {
         _articleWebview.loadDataWithBaseURL(null, "<style>img{display: inline;height: auto;max-width: 100%;}</style>" + "<body dir=\"rtl\">"+ part2 + "</body>", "text/html", "utf-8", null);
 
     }
-
-    public static String html2text(String html) {
-        return Jsoup.parse(html).text();
-    }
 }

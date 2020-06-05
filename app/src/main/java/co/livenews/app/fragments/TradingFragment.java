@@ -131,21 +131,23 @@ public class TradingFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(), new RequestListener<SubmitData>() {
-                    @Override
-                    public void onSuccess(SubmitData response) {
-                        if (response !=  null && response.getStatus().equals("ok")){
-                            showDialog(getResources().getString(R.string.thank_you_ar)+ _name.getText().toString(),getResources().getString(R.string.submit_ar));
-                            _name.setText("");
-                            _phone.setText("");
+                if (validateInput()){
+                    _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(), new RequestListener<SubmitData>() {
+                        @Override
+                        public void onSuccess(SubmitData response) {
+                            if (response !=  null && response.getStatus().equals("ok")){
+                                showDialog(getResources().getString(R.string.thank_you_ar)+ _name.getText().toString(),getResources().getString(R.string.submit_ar));
+                                _name.setText("");
+                                _phone.setText("");
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable t) {
-                        showDialog("Please try again later" + _name.getText().toString(),"Something is wrong. \n"+t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onError(Throwable t) {
+                            showDialog("Please try again later" + _name.getText().toString(),"Something is wrong. \n"+t.getMessage());
+                        }
+                    });
+                }
             }
         });
     }
@@ -183,4 +185,27 @@ public class TradingFragment extends Fragment {
         });
     }
 
+    private boolean validateInput(){
+        boolean v = false;
+        String n = _name.getText().toString();
+        String p = _phone.getText().toString();
+
+        if (_name == null || n == null || n.equals("")){
+            _name.setError("خطأ");
+            v = false;
+        }else {
+            _name.setError(null);
+            v=true;
+        }
+
+        if (_phone == null || p == null || p.equals("")){
+            _phone.setError("خطأ");
+            v = false;
+        }else {
+            _phone.setError(null);
+            v=true;
+        }
+
+        return v;
+    }
 }
