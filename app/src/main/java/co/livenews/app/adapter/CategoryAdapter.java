@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.livenews.app.ArticleActivity;
 import co.livenews.app.R;
 import co.livenews.app.models.TradingModel;
 
@@ -54,7 +56,7 @@ public class CategoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         context = activity.getApplicationContext();
-        TradingModel.AllRecord tradingModel = data.get(position);
+        final TradingModel.AllRecord tradingModel = data.get(position);
 
         if (inflater == null)
             inflater = (LayoutInflater) activity
@@ -64,6 +66,7 @@ public class CategoryAdapter extends BaseAdapter {
 
 
 
+        LinearLayout _item = convertView.findViewById(R.id.item);
         TextView _title = convertView.findViewById(R.id.titleText);
         TextView _date = convertView.findViewById(R.id.publishedDate);
         ShapeableImageView _image = convertView.findViewById(R.id.titleImage);
@@ -76,18 +79,18 @@ public class CategoryAdapter extends BaseAdapter {
                 .centerCrop()
                 .fit()
                 .into(_image);
-/*
-        _allNumbers.setOnClickListener(new View.OnClickListener() {
+
+        _item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(activity, NumberDialActivity.class);
+                Intent intent =  new Intent(activity, ArticleActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("website",websitesModel.getWebsite());
-                intent.putExtra("websiteID",websitesModel.getWebsiteID());
+                intent.putExtra("img",tradingModel.getImage());
+                intent.putExtra("art",tradingModel.getPostContent());
                 context.startActivity(intent);
             }
         });
-*/
+
 
 
         return convertView;

@@ -127,11 +127,11 @@ public class TradingFragment extends Fragment {
 
         _country = ccp.getSelectedCountryName();
 
-                Button submitButton = view.findViewById(R.id.submitLead);
+        Button submitButton = view.findViewById(R.id.submitLead);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryEnglishName(), new RequestListener<SubmitData>() {
+                _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(), new RequestListener<SubmitData>() {
                     @Override
                     public void onSuccess(SubmitData response) {
                         if (response !=  null && response.getStatus().equals("ok")){

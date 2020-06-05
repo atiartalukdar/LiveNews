@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url 'https://plugins.gradle.org/m2/'}
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
@@ -26,7 +26,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-                onesignal_app_id: '0d689773-d974-4601-9d8f-aa4823d5d891',
+                onesignal_app_id               : '0d689773-d974-4601-9d8f-aa4823d5d891',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]
@@ -78,5 +78,9 @@ dependencies {
 
     //shimmer library for making facebook locading animation
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //used for html to text
+    implementation 'org.jsoup:jsoup:1.11.1'
+
 
 }
