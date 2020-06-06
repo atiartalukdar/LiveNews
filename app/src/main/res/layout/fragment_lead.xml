@@ -54,9 +54,9 @@
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/ccp"
                     android:layout_width="wrap_content"
-                    app:ccp_defaultLanguage="ARABIC"
+                    app:ccp_countryAutoDetectionPref="NETWORK_SIM_LOCALE"
                     app:ccp_autoDetectCountry="true"
-                    app:ccp_countryAutoDetectionPref="NETWORK_LOCALE_SIM"
+                    app:ccp_autoDetectLanguage="true"
                     android:layout_height="wrap_content" />
 
                 <EditText

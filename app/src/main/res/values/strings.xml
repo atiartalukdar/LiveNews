@@ -42,5 +42,9 @@
     <string name="submitted_ar">تم تسجيل بياناتك سيتم التواصل معك على هاتفك خلال ٢٤ ساعه</string>
     <string name="submitted_en">Your data is submitted </string>
 
+    <string name="facebook_app_id">255119529093943</string>
+    <string name="fb_login_protocol_scheme">fb255119529093943</string>
+
+
 
 </resources>

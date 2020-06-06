@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -23,9 +24,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String a = getIntent().getStringExtra("start");
+        ViewPagerAdapter adapter = createCardAdapter();
+
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);
-        viewPager.setAdapter(createCardAdapter());
+        viewPager.setAdapter(adapter);
+
+        if (a!= null && a.equals("one")){
+            //adapter.createFragment(2);
+            viewPager.setCurrentItem(2);
+        }
+
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -59,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ViewPagerAdapter createCardAdapter() {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        ViewPagerAdapter adapter;
+        adapter = new ViewPagerAdapter(this);
         return adapter;
     }
 }

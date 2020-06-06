@@ -12,14 +12,35 @@
         android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
         android:id="@+id/articleWebView">
 
     </WebView>
-
-    <TextView
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tview">
+        android:padding="10dp"
+        android:layout_height="wrap_content">
 
-    </TextView>
+        <Button
+            android:onClick="backButton"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الرجوع للخلف">
+        </Button>
+
+        <Button
+            android:onClick="startTrading"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="ابدا التداول الان">
+        </Button>
+
+    </LinearLayout>
+
 </LinearLayout>

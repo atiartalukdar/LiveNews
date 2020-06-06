@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -27,11 +28,11 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
         _articleWebview = findViewById(R.id.articleWebView);
-        _tv = findViewById(R.id.tview);
         //_articleWebview.getSettings().getJavaScriptEnabled();
         _articleWebview.setWebChromeClient(new WebChromeClient());
         _articleWebview.setWebViewClient(new WebViewClient());
@@ -60,4 +61,31 @@ public class ArticleActivity extends AppCompatActivity {
         _articleWebview.loadDataWithBaseURL(null, "<style>img{display: inline;height: auto;max-width: 100%;}</style>" + "<body dir=\"rtl\">"+ part2 + "</body>", "text/html", "utf-8", null);
 
     }
+
+    public void backButton(View view) {
+        onBackPressed();
+    }
+
+    public void startTrading(View view) {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("start","one");
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

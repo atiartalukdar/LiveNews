@@ -124,7 +124,6 @@ public class TradingFragment extends Fragment {
         _phone = view.findViewById(R.id.phone);
         ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(_phone);
-
         _country = ccp.getSelectedCountryName();
 
         Button submitButton = view.findViewById(R.id.submitLead);
