@@ -68,7 +68,7 @@ public class ArticleActivity extends AppCompatActivity {
 
     public void startTrading(View view) {
         Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("start","one");
+        intent.putExtra("start","2");
         startActivity(intent);
         finish();
     }

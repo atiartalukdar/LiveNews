@@ -2,6 +2,7 @@ package co.livenews.app.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.hbb20.CountryCodePicker;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -25,6 +27,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.livenews.app.MainActivity;
 import co.livenews.app.R;
 import co.livenews.app.adapter.CategoryAdapter;
 import co.livenews.app.models.SubmitData;
@@ -151,10 +154,23 @@ public class TradingFragment extends Fragment {
         });
     }
 
-    private void categoryFragment(View view, String categoryID) {
+    private void categoryFragment(View view, final String categoryID) {
         listView = view.findViewById(R.id.listView);
         categoryAdapter = new CategoryAdapter(getActivity(), tradingModelList,categoryID);
         listView.setAdapter(categoryAdapter);
+        loadData(categoryID);
+        final SwipeRefreshLayout pullToRefresh1 = view.findViewById(R.id.pullToRefresh);
+        pullToRefresh1.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData(categoryID);
+                pullToRefresh1.setRefreshing(false);
+
+            }
+        });
+    }
+
+    private void loadData(String categoryID){
         final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel(getResources().getString(R.string.please_wait_ar))
@@ -182,8 +198,8 @@ public class TradingFragment extends Fragment {
             public void onError(Throwable t) {
                 kProgressHUD.dismiss(); }
         });
-    }
 
+    }
     private boolean validateInput(){
         boolean v = false;
         String n = _name.getText().toString();

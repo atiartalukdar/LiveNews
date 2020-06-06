@@ -31,9 +31,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         viewPager.setAdapter(adapter);
 
-        if (a!= null && a.equals("one")){
-            //adapter.createFragment(2);
+        if (a!= null && a.equals("2")){
             viewPager.setCurrentItem(2);
+        }
+        if (a!= null && a.equals("1")){
+            viewPager.setCurrentItem(1);
+        }
+        if (a!= null && a.equals("0")){
+            viewPager.setCurrentItem(0);
         }
 
 
