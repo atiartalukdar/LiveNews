@@ -1,4 +1,4 @@
-package co.livenews.app.retrofit;
+package co.mubashirgulf.app.retrofit;
 
 public interface RequestListener<T> {
     void onSuccess(T response);

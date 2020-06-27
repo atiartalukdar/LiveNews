@@ -1,4 +1,4 @@
-package co.livenews.app.bp;
+package co.mubashirgulf.app.bp;
 
 import android.app.Application;
 import android.content.Context;

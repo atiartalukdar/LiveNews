@@ -1,4 +1,4 @@
-package co.livenews.app;
+package co.mubashirgulf.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +14,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import org.jsoup.Jsoup;
-import org.w3c.dom.Text;
-
 public class ArticleActivity extends AppCompatActivity {
     final String tag = getClass().getSimpleName() + "Atiar - ";
     WebView _articleWebview;
+    String postLink="";
     TextView _tv;
     @SuppressLint("JavascriptInterface")
     @Override
@@ -43,6 +40,7 @@ public class ArticleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String image = intent.getStringExtra("img");
         String article = intent.getStringExtra("art");
+        postLink = intent.getStringExtra("postLink");
         article = article.replaceAll("\\r\\n\\r\\n", "<br><br>").replaceAll("\\[/caption\\]","");
 
         String[] parts = article.split("1500\"]");
@@ -69,6 +67,7 @@ public class ArticleActivity extends AppCompatActivity {
     public void startTrading(View view) {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("start","2");
+        intent.putExtra("link",postLink);
         startActivity(intent);
         finish();
     }

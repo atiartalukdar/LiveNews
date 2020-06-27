@@ -1,23 +1,23 @@
-package co.livenews.app.retrofit;
+package co.mubashirgulf.app.retrofit;
 
 import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import co.livenews.app.bp.MyApplication;
-import co.livenews.app.models.SubmitData;
-import co.livenews.app.models.TradingModel;
+import co.mubashirgulf.app.bp.MyApplication;
+import co.mubashirgulf.app.models.DefaultPostModel;
+import co.mubashirgulf.app.models.SubmitData;
+import co.mubashirgulf.app.models.TradingModel;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class APIManager {
-    public static final String BASE_URL = "https://live-news.co/webservices/";
+    public static final String BASE_URL = "https://akhbarmubashir.online/webservices/";
 
     private final APIInterface api;
     private Context _context;
@@ -48,8 +48,12 @@ public class APIManager {
         api.getArticleList(ctgID,sortOrder).enqueue(new APICallback<TradingModel>(_context,listener));
     }
 
-    public void sendLead(String name, String phone, String country, RequestListener<SubmitData> listener){
-        api.sendLead(name,phone,country).enqueue(new APICallback<SubmitData>(_context,listener));
+    public void getDefaultPost(RequestListener<DefaultPostModel> listener) {
+        api.getDefaultPost().enqueue(new APICallback<DefaultPostModel>(_context,listener));
+    }
+
+    public void sendLead(String name, String phone, String country, String  link, RequestListener<SubmitData> listener){
+        api.sendLead(name,phone,country,link).enqueue(new APICallback<SubmitData>(_context,listener));
     }
 
 

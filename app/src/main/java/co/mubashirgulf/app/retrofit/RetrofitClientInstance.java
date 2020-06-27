@@ -1,4 +1,4 @@
-package co.livenews.app.retrofit;
+package co.mubashirgulf.app.retrofit;
 
 import java.util.concurrent.TimeUnit;
 

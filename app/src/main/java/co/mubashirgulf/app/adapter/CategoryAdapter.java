@@ -1,4 +1,4 @@
-package co.livenews.app.adapter;
+package co.mubashirgulf.app.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +16,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.livenews.app.ArticleActivity;
-import co.livenews.app.R;
-import co.livenews.app.models.TradingModel;
+import co.mubashirgulf.app.ArticleActivity;
+import co.mubashirgulf.app.R;
+import co.mubashirgulf.app.models.TradingModel;
 
 public class CategoryAdapter extends BaseAdapter {
     final String tag = getClass().getSimpleName() + "Atiar - ";
@@ -87,6 +85,7 @@ public class CategoryAdapter extends BaseAdapter {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("img",tradingModel.getImage());
                 intent.putExtra("art",tradingModel.getPostContent());
+                intent.putExtra("postLink",tradingModel.getPostLink());
                 context.startActivity(intent);
             }
         });

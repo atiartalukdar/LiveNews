@@ -1,8 +1,6 @@
-package co.livenews.app.fragments;
+package co.mubashirgulf.app.fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -27,13 +22,13 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.livenews.app.MainActivity;
-import co.livenews.app.R;
-import co.livenews.app.adapter.CategoryAdapter;
-import co.livenews.app.models.SubmitData;
-import co.livenews.app.models.TradingModel;
-import co.livenews.app.retrofit.APIManager;
-import co.livenews.app.retrofit.RequestListener;
+import co.mubashirgulf.app.MainActivity;
+import co.mubashirgulf.app.R;
+import co.mubashirgulf.app.adapter.CategoryAdapter;
+import co.mubashirgulf.app.models.SubmitData;
+import co.mubashirgulf.app.models.TradingModel;
+import co.mubashirgulf.app.retrofit.APIManager;
+import co.mubashirgulf.app.retrofit.RequestListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,16 +43,11 @@ public class TradingFragment extends Fragment {
     APIManager _apiManager;
     ListView listView;
     CategoryAdapter categoryAdapter;
-
+    String leadCameFrom = "";
     List<TradingModel.AllRecord> tradingModelList = new ArrayList<>();;
 
     private static final String ARG_COUNT = "param1";
     private Integer counter;
-    private int[] COLOR_MAP = {
-            R.color.red_100, R.color.red_300, R.color.red_500, R.color.red_700, R.color.blue_100,
-            R.color.blue_300, R.color.blue_500, R.color.blue_700, R.color.green_100, R.color.green_300,
-            R.color.green_500, R.color.green_700
-    };
 
     public TradingFragment() {
         // Required empty public constructor
@@ -128,19 +118,22 @@ public class TradingFragment extends Fragment {
         ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(_phone);
         _country = ccp.getSelectedCountryName();
+        leadCameFrom = ((MainActivity) getActivity()).getPostLink();
 
         Button submitButton = view.findViewById(R.id.submitLead);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateInput()){
-                    _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(), new RequestListener<SubmitData>() {
+                    _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(),leadCameFrom, new RequestListener<SubmitData>() {
                         @Override
                         public void onSuccess(SubmitData response) {
                             if (response !=  null && response.getStatus().equals("ok")){
                                 showDialog(getResources().getString(R.string.thank_you_ar)+ _name.getText().toString(),getResources().getString(R.string.submit_ar));
                                 _name.setText("");
                                 _phone.setText("");
+                                ((MainActivity) getActivity()).setPostLink("");
+                                leadCameFrom  = "";
                             }
                         }
 
@@ -200,6 +193,7 @@ public class TradingFragment extends Fragment {
         });
 
     }
+
     private boolean validateInput(){
         boolean v = false;
         String n = _name.getText().toString();

@@ -19,14 +19,14 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "co.livenews.app"
+        applicationId "co.mubashirgulf.app"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-                onesignal_app_id               : '0d689773-d974-4601-9d8f-aa4823d5d891',
+                onesignal_app_id               : '6c024025-66b3-4ba9-85f5-08b0d87ef062',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]
@@ -85,5 +85,9 @@ dependencies {
 
     //facebook ad sdk
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+
+    //Appintro
+    implementation 'com.github.AppIntro:AppIntro:6.0.0'
+
 
 }

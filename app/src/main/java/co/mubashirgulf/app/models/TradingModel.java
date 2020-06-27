@@ -1,4 +1,4 @@
-package co.livenews.app.models;
+package co.mubashirgulf.app.models;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -69,6 +69,11 @@ public class TradingModel {
         @Expose
         private String image;
 
+        @SerializedName("post_link")
+        @Expose
+        private String postLink;
+
+
         public String getPostId() {
             return postId;
         }
@@ -109,6 +114,13 @@ public class TradingModel {
             this.image = image;
         }
 
+        public String getPostLink() {
+            return postLink;
+        }
+
+        public void setPostLink(String postLink) {
+            this.postLink = postLink;
+        }
     }
 
     public class LatestArticle {
@@ -129,6 +141,10 @@ public class TradingModel {
         @Expose
         private String image;
 
+        @SerializedName("post_link")
+        @Expose
+        private String postLink;
+
         public String getPostId() {
             return postId;
         }
@@ -169,6 +185,13 @@ public class TradingModel {
             this.image = image;
         }
 
+        public String getPostLink() {
+            return postLink;
+        }
+
+        public void setPostLink(String postLink) {
+            this.postLink = postLink;
+        }
     }
 
     public class AllRecord {
@@ -188,6 +211,9 @@ public class TradingModel {
         @SerializedName("image")
         @Expose
         private String image;
+        @SerializedName("post_link")
+        @Expose
+        private String postLink;
 
         public String getPostId() {
             return postId;
@@ -229,5 +255,12 @@ public class TradingModel {
             this.image = image;
         }
 
+        public String getPostLink() {
+            return postLink;
+        }
+
+        public void setPostLink(String postLink) {
+            this.postLink = postLink;
+        }
     }
 }

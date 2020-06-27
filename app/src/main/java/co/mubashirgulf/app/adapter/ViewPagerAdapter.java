@@ -1,11 +1,11 @@
-package co.livenews.app.adapter;
+package co.mubashirgulf.app.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import co.livenews.app.fragments.TradingFragment;
+import co.mubashirgulf.app.fragments.TradingFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     private static final int CARD_ITEM_SIZE = 3;

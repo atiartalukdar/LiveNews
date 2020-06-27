@@ -1,4 +1,4 @@
-package co.livenews.app.models;
+package co.mubashirgulf.app.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

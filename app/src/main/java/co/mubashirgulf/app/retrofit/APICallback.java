@@ -1,4 +1,4 @@
-package co.livenews.app.retrofit;
+package co.mubashirgulf.app.retrofit;
 
 import android.content.Context;
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">تعلیم الفوركس والاستثمار</string>
+    <string name="app_name">مباشر الخليج</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -42,9 +42,8 @@
     <string name="submitted_ar">تم تسجيل بياناتك سيتم التواصل معك على هاتفك خلال ٢٤ ساعه</string>
     <string name="submitted_en">Your data is submitted </string>
 
-    <string name="facebook_app_id">255119529093943</string>
-    <string name="fb_login_protocol_scheme">fb255119529093943</string>
-
+    <string name="facebook_app_id">276897190311813</string>
+    <string name="fb_login_protocol_scheme">fb276897190311813</string>
 
 
 </resources>

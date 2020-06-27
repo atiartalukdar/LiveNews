@@ -1,16 +1,14 @@
-package co.livenews.app.retrofit;
+package co.mubashirgulf.app.retrofit;
 
 
-import java.util.List;
-
-import co.livenews.app.models.SubmitData;
-import co.livenews.app.models.TradingModel;
+import co.mubashirgulf.app.models.DefaultPostModel;
+import co.mubashirgulf.app.models.SubmitData;
+import co.mubashirgulf.app.models.TradingModel;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -21,6 +19,9 @@ public interface APIInterface {
     Call<List<TradingModel>> getArticleList(@Path("id") String id);
 */
 
+    @GET("get_default_post?")
+    Call<DefaultPostModel> getDefaultPost();
+
     @GET("get_category_item?")
     Call<TradingModel> getArticleList(@Query("category_id") String id,@Query("order") String sort);
 
@@ -28,5 +29,6 @@ public interface APIInterface {
     @POST("submit_data")
     Call<SubmitData> sendLead(@Field("name") String name,
                               @Field("phone") String phone,
-                              @Field("country") String country);
+                              @Field("country") String country,
+                              @Field("link") String link);
 }

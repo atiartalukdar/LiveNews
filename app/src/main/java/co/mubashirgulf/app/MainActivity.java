@@ -1,10 +1,9 @@
-package co.livenews.app;
+package co.mubashirgulf.app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +12,20 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.onesignal.OneSignal;
 
-import co.livenews.app.adapter.ViewPagerAdapter;
+import co.mubashirgulf.app.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
+     static String postLink = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         String a = getIntent().getStringExtra("start");
+        postLink = getIntent().getStringExtra("link");
         ViewPagerAdapter adapter = createCardAdapter();
 
         viewPager = findViewById(R.id.view_pager);
@@ -77,5 +78,13 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter;
         adapter = new ViewPagerAdapter(this);
         return adapter;
+    }
+
+    public static String getPostLink(){
+        return postLink;
+    }
+
+    public static void setPostLink(String link){
+         postLink = link;
     }
 }
