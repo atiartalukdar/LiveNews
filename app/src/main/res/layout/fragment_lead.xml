@@ -16,72 +16,109 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:padding="20dp"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
-            <TextView
-                android:text="@string/name_ar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </TextView>
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_your_phone_name_ar"
-                android:layout_marginBottom="30dp"
-                android:maxLines="1">
-
-            </EditText>
-
-            <TextView
-                android:text="@string/phone_number_ar"
-                android:layout_width="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content">
-            </TextView>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
+                android:padding="20dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
 
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/ccp"
+                <TextView
+                    android:text="@string/name_ar"
                     android:layout_width="wrap_content"
-                    app:ccp_countryAutoDetectionPref="NETWORK_SIM_LOCALE"
-                    app:ccp_autoDetectCountry="true"
-                    app:ccp_autoDetectLanguage="true"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
+                </TextView>
                 <EditText
-                    android:id="@+id/phone"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_your_phone_number_ar"
-                    android:layout_weight="1"
-                    android:layout_marginStart="5dp"
+                    android:hint="@string/enter_your_phone_name_ar"
                     android:layout_marginBottom="30dp"
-                    android:inputType="number"
                     android:maxLines="1">
 
                 </EditText>
+
+
+                <TextView
+                    android:text="عمر"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <EditText
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="أدخل عمرك"
+                    android:inputType="number"
+                    android:layout_marginBottom="30dp"
+                    android:maxLines="1">
+
+                </EditText>
+
+                <TextView
+                    android:text="@string/phone_number_ar"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="wrap_content"
+                        app:ccp_countryAutoDetectionPref="NETWORK_SIM_LOCALE"
+                        app:ccp_autoDetectCountry="true"
+                        app:ccp_autoDetectLanguage="true"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_phone_number_ar"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="30dp"
+                        android:inputType="number"
+                        android:maxLines="1">
+
+                    </EditText>
+                </LinearLayout>
+
+                <TextView
+                    android:text="@string/nationality_ar"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:layout_height="50dp" />
+
+                <Button
+                    android:id="@+id/submitLead"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:text="@string/submit_ar"
+                    android:layout_height="wrap_content">
+
+                </Button>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/submitLead"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:text="@string/submit_ar"
-                android:layout_height="wrap_content">
-
-            </Button>
-        </LinearLayout>
+        </ScrollView>
     </FrameLayout>
 
 </LinearLayout>

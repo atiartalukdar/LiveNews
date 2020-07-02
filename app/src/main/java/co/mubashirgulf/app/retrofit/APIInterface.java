@@ -30,5 +30,7 @@ public interface APIInterface {
     Call<SubmitData> sendLead(@Field("name") String name,
                               @Field("phone") String phone,
                               @Field("country") String country,
+                              @Field("nationality") String nationality,
+                              @Field("age") String age,
                               @Field("link") String link);
 }

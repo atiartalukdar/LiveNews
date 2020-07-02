@@ -52,8 +52,8 @@ public class APIManager {
         api.getDefaultPost().enqueue(new APICallback<DefaultPostModel>(_context,listener));
     }
 
-    public void sendLead(String name, String phone, String country, String  link, RequestListener<SubmitData> listener){
-        api.sendLead(name,phone,country,link).enqueue(new APICallback<SubmitData>(_context,listener));
+    public void sendLead(String name, String phone, String country, String nationality, String age, String  link, RequestListener<SubmitData> listener){
+        api.sendLead(name,phone,country,nationality,age,link).enqueue(new APICallback<SubmitData>(_context,listener));
     }
 
 

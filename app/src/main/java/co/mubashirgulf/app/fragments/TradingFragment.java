@@ -1,14 +1,20 @@
 package co.mubashirgulf.app.fragments;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +43,7 @@ import co.mubashirgulf.app.retrofit.RequestListener;
  */
 public class TradingFragment extends Fragment {
     private final String TAG = getClass().getName() + " Atiar - ";
-    EditText _name,_phone;
+    EditText _name,_phone,_age;
     String _country;
     CountryCodePicker ccp;
     APIManager _apiManager;
@@ -48,6 +54,11 @@ public class TradingFragment extends Fragment {
 
     private static final String ARG_COUNT = "param1";
     private Integer counter;
+
+    private Spinner spinner;
+    private static final String[] paths = {"مواطن", "وافد"};
+    String nationality = "";
+
 
     public TradingFragment() {
         // Required empty public constructor
@@ -115,30 +126,69 @@ public class TradingFragment extends Fragment {
     private void leadFragment(View view){
         _name = view.findViewById(R.id.name);
         _phone = view.findViewById(R.id.phone);
+        _age = view.findViewById(R.id.age);
         ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(_phone);
         _country = ccp.getSelectedCountryName();
+        final String age = "";
         leadCameFrom = ((MainActivity) getActivity()).getPostLink();
+
+        spinner = view.findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item,paths);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        //nationality = String.valueOf(adapterView.getItemAtPosition(i));
+                        nationality = paths[i];
+                        //Toast.makeText(Plan_Trip.this, travel_type, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+
+                }
+        );
 
         Button submitButton = view.findViewById(R.id.submitLead);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateInput()){
-                    _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(),leadCameFrom, new RequestListener<SubmitData>() {
+                    final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
+                            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                            .setLabel(getResources().getString(R.string.please_wait_ar))
+                            .setDetailsLabel(getResources().getString(R.string.downloadin_ar))
+                            .setCancellable(false)
+                            .setAnimationSpeed(2)
+                            .setDimAmount(0.5f)
+                            .show();
+                    _apiManager.sendLead(_name.getText().toString() + "", ccp.getFullNumberWithPlus(), ccp.getSelectedCountryName(),nationality,age,leadCameFrom, new RequestListener<SubmitData>() {
                         @Override
                         public void onSuccess(SubmitData response) {
+                            kProgressHUD.dismiss();
                             if (response !=  null && response.getStatus().equals("ok")){
                                 showDialog(getResources().getString(R.string.thank_you_ar)+ _name.getText().toString(),getResources().getString(R.string.submit_ar));
                                 _name.setText("");
                                 _phone.setText("");
+                                _age.setText("");
                                 ((MainActivity) getActivity()).setPostLink("");
                                 leadCameFrom  = "";
                             }
+
+
                         }
 
                         @Override
                         public void onError(Throwable t) {
+                            kProgressHUD.dismiss();
                             showDialog("Please try again later" + _name.getText().toString(),"Something is wrong. \n"+t.getMessage());
                         }
                     });
@@ -195,16 +245,17 @@ public class TradingFragment extends Fragment {
     }
 
     private boolean validateInput(){
-        boolean v = false;
+        boolean v = true;
         String n = _name.getText().toString();
         String p = _phone.getText().toString();
+        String age = _age.getText().toString();
+        String nationality = spinner.getSelectedItem().toString();
 
         if (_name == null || n == null || n.equals("")){
             _name.setError("خطأ");
             v = false;
         }else {
             _name.setError(null);
-            v=true;
         }
 
         if (_phone == null || p == null || p.equals("")){
@@ -212,7 +263,24 @@ public class TradingFragment extends Fragment {
             v = false;
         }else {
             _phone.setError(null);
-            v=true;
+        }
+
+        if (_age == null || age == null || age.equals("")){
+            _age.setError("خطأ");
+            v = false;
+        }else {
+            _age.setError(null);
+        }
+
+        if (spinner == null || nationality == null || nationality.equals("")){
+            TextView errorText = (TextView)spinner.getSelectedView();
+            errorText.setError("خطأ");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            Toast.makeText(getContext(), "خطأ", Toast.LENGTH_SHORT).show();
+            v = false;
+        }else {
+            TextView errorText = (TextView)spinner.getSelectedView();
+            errorText.setError(null);
         }
 
         return v;

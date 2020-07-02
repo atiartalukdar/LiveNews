@@ -38,6 +38,9 @@
     <string name="thank_you_ar">شكراً لك يا</string>
     <string name="thank_you_en">Thank you </string>
 
+    <string name="nationality_ar">اختار جنسيتك</string>
+    <string name="nationality_en">Nationality</string>
+
 
     <string name="submitted_ar">تم تسجيل بياناتك سيتم التواصل معك على هاتفك خلال ٢٤ ساعه</string>
     <string name="submitted_en">Your data is submitted </string>
