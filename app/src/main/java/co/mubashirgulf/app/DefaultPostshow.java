@@ -31,6 +31,9 @@ public class DefaultPostshow extends AppIntro {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_postshow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("الرجوع للخلف"); //back button.
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
@@ -69,7 +72,9 @@ public class DefaultPostshow extends AppIntro {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                //onBackPressed();
+                startActivity(new Intent(this,MainActivity.class));
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

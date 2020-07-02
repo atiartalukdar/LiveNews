@@ -59,7 +59,6 @@ public class TradingFragment extends Fragment {
     private static final String[] paths = {"مواطن", "وافد"};
     String nationality = "";
 
-
     public TradingFragment() {
         // Required empty public constructor
     }

@@ -1,10 +1,11 @@
 package co.mubashirgulf.app.models;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TradingModel {
+public class TradingModel implements Serializable{
 
     @SerializedName("status")
     @Expose
@@ -51,7 +52,7 @@ public class TradingModel {
         this.latestArticles = latestArticles;
     }
 
-    public class AllRecord {
+    public class AllRecord implements Serializable{
 
         @SerializedName("post_id")
         @Expose
@@ -133,7 +134,7 @@ public class TradingModel {
 
     }
 
-    public class Comment {
+    public class Comment implements Serializable {
 
         @SerializedName("comment_id")
         @Expose

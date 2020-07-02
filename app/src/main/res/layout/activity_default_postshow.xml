@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".DefaultPostshow">
+    tools:context=".ArticleActivity">
 
     <WebView
         android:overScrollMode="never"
@@ -29,16 +29,20 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="العودة إلى المنزل">
+            android:visibility="gone"
+            android:text="الرجوع للخلف">
         </Button>
 
         <Button
+            android:background="@color/red_100"
             android:onClick="startTrading"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
-            android:text="ابدا التداول الان">
+            android:text="سجل بياناتك الان">
         </Button>
 
     </LinearLayout>

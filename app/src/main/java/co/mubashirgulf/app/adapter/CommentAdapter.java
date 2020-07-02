@@ -20,20 +20,18 @@ import co.mubashirgulf.app.ArticleActivity;
 import co.mubashirgulf.app.R;
 import co.mubashirgulf.app.models.TradingModel;
 
-public class CategoryAdapter extends BaseAdapter {
+public class CommentAdapter extends BaseAdapter {
     final String tag = getClass().getSimpleName() + "Atiar - ";
     private Context context;
     private Activity activity;
     private LayoutInflater inflater;
-    private List<TradingModel.AllRecord> data;
-    private String id;
+    private List<TradingModel.Comment> data;
 
     private final String TAG = getClass().getSimpleName() + " Atiar= ";
 
-    public CategoryAdapter(Activity activity, List<TradingModel.AllRecord> data, String id) {
+    public CommentAdapter(Activity activity, List<TradingModel.Comment> data) {
         this.activity = activity;
         this.data = data;
-        this.id = id;
     }
 
     @Override
@@ -54,51 +52,31 @@ public class CategoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         context = activity.getApplicationContext();
-        final TradingModel.AllRecord tradingModel = data.get(position);
+        final TradingModel.Comment tradingModel = data.get(position);
 
         if (inflater == null)
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.list_item, null);
+            convertView = inflater.inflate(R.layout.list_item_comment, null);
 
 
 
         LinearLayout _item = convertView.findViewById(R.id.item);
-        TextView _title = convertView.findViewById(R.id.titleText);
+        TextView _author = convertView.findViewById(R.id.author);
+        TextView _title = convertView.findViewById(R.id.content);
         TextView _date = convertView.findViewById(R.id.publishedDate);
-        ShapeableImageView _image = convertView.findViewById(R.id.titleImage);
 
-        _title.setText(tradingModel.getPostTitle());
-        _date.setText(tradingModel.getPostDate());
-
-        Picasso.get()
-                .load(tradingModel.getImage())
-                .centerCrop()
-                .fit()
-                .into(_image);
-
-        _item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(activity, ArticleActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("img",tradingModel.getImage());
-                intent.putExtra("art",tradingModel.getPostContent());
-                intent.putExtra("postLink",tradingModel.getPostLink());
-                intent.putExtra("comments",tradingModel);
-                context.startActivity(intent);
-            }
-        });
-
-
+        _author.setText(tradingModel.getCommentAuthor());
+        _title.setText(tradingModel.getCommentContent());
+        _date.setText(tradingModel.getCommentDate());
 
         return convertView;
 
     }
 
     //To update the searchView items in TransportList Activity
-    public void update(List<TradingModel.AllRecord> resuls){
+    public void update(List<TradingModel.Comment> resuls){
         data = new ArrayList<>();
         data.addAll(resuls);
         notifyDataSetChanged();

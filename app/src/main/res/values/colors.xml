@@ -17,4 +17,6 @@
     <color name="green_500">#673AB7</color>
     <color name="green_700">#0B8043</color>
     <color name="black">#000000</color>
+
+    <color name="author">#94AC78</color>
 </resources>
